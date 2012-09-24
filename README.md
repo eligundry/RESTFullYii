@@ -1,3 +1,5 @@
+# RESTFullYii
+
 Adds RESTFul API to your Yii application.
 
 Lets say you have a controller named 'PostController'. Your standard routes will look as they always do, ie /post/actionName .
@@ -6,23 +8,17 @@ RESTFullYii adds a new set of RESTFul routes to your standard routes, but prepen
 
 So if you apply RESTFullYii to the 'PostController' you will get the following new routes by default (You can override their behavior in your controller).
 
+```
 [GET] http://yoursite.com/api/post/ (returns all posts)
-
 [GET] http://yoursite.com/api/post/1 (returns post with PK=1)
-
 [GET] http://yoursite.com/api/post/count (returns total count of posts)
-
 [GET] http://yoursite.com/api/post/limit/x (returns x number of posts)
-
 [GET] http://yoursite.com/api/post/limit/x/y (returns x number of posts with offset y)
-
 [POST] http://yoursite.com/api/post/ (create new post)
-
 [POST] http://yoursite.com/api/post/search (returns posts matching post attributes)
-
 [PUT] http://yoursite.com/api/post/1 (update post with PK=1)
-
 [DELETE] http://yoursite.com/api/post/1 (delete post with PK=1)
+```
 
 ## Requirements
 
@@ -30,17 +26,17 @@ Yii 1.8 or above
 
 ## Installation
 
-<ol>
-<li>Place RESTFullYii into your 'protected/extensions' directory</li>
-<li>In your main.php config and add this code:
+Place RESTFullYii into your 'protected/extensions' directory.
 
-``` php
+Then, in your main.php config, add this code:
+
+```php
 'import' => array(
 	'ext.restfullyii.components.*',
 ),
 ```
-</li>
-<li>You will need to add the routes below to your main.php. They should be added to the beginning of the rules array.
+
+You will need to add the routes below to your main.php. They should be added to the beginning of the rules array.
 
 ```php
 'urlManager' => array(
@@ -94,8 +90,6 @@ config for 'urlManager' should look like this:
 	'rules'=>require(dirname(__FILE__).'/../extensions/restfullyii/config/routes.php'),
 ),
 ```
-</li>
-
 
 Another alternative is to use the custom rule class.  To use this method you
 will need to set the 'restControllers' parameter to the array of controllers you
@@ -116,12 +110,18 @@ something like this:
 	),
 ),
 ```
-</li>
-<li>
+
 Setting up the controller: (This applies to controllers for which you you would
 like to add RESTFull routes) Change your controller class so that it extends
-ERestController: class PostController extends ERestController{..} You will need
-to merge your fileters & accessRules methods with the parent methods here. To do
+ERestController:
+
+```php
+class PostController extends ERestController {
+	&hellip;
+}
+```
+
+You will need to merge your filters & accessRules methods with the parent methods here. To do
 that you simply change the name of these methods by prepending an underscore
 ("\_"). So in your controller you will need to change the following:
 
